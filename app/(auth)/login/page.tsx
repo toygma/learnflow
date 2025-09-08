@@ -1,5 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { GithubIcon } from "lucide-react";
 import React from "react";
 
@@ -14,14 +16,25 @@ const Login = () => {
           Connect using your GitHub account
         </p>
       </CardHeader>
-      <CardContent className="flex justify-center">
+      <CardContent className="flex flex-col  gap-4">
         <Button 
-          className="group relative w-3/4 py-6 text-lg font-medium rounded-xl bg-indigo-600 text-white hover:bg-indigo-700 transition-all duration-300 flex items-center justify-center gap-3 cursor-pointer"
+          className="group relative py-6 text-lg font-medium rounded-xl bg-indigo-600 text-white hover:bg-indigo-700 transition-all duration-300 flex items-center justify-center gap-3 cursor-pointer "
           variant="default"
         >
           <GithubIcon className="size-6 group-hover:scale-110 transition-transform" />
           <span>Login with GitHub</span>
         </Button>
+        <div className="relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t after:border-black/10 after:dark:border-white/10">
+          <span className="relative z-10 bg-gradient-to-br from-indigo-50 to-purple-100 px-2">Or continue with</span>
+        </div>
+
+        <div className="grid gap-3">
+          <div className="grid gap-2">
+            <Label htmlFor="email">Email</Label>
+            <Input type="email" placeholder="m@example.com"/>
+            <Button variant={"outline"} className="w-full bg-indigo-600 text-white hover:bg-indigo-700 transition-all duration-300 flex items-center justify-center gap-3 cursor-pointer hover:text-white">Continue with email</Button>
+          </div>
+        </div>
       </CardContent>
     </Card>
   );
