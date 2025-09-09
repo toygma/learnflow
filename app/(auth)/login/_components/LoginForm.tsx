@@ -1,6 +1,7 @@
 "use client"
-import { useTransition } from "react";
+import { useState, useTransition } from "react";
 import { GithubIcon, Loader } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -8,7 +9,10 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { authClient } from "@/lib/auth-client";
 const LoginForm = () => {
-      const [githubPending, startGithubTransition] = useTransition();
+  const router = useRouter();
+  const [githubPending, startGithubTransition] = useTransition();
+  const [emailPending, startEmailTransition] = useTransition();
+  const [email,setEmail] = useState("")
 
   async function signInWithGitHub() {
     startGithubTransition(async () => {
@@ -26,6 +30,25 @@ const LoginForm = () => {
       });
     });
   }
+
+  function signInWithEmail(){
+    startEmailTransition(async()=>{
+      await authClient.emailOtp.sendVerificationOtp({
+        email: email,
+        type: 'sign-in',
+        fetchOptions: {
+          onSuccess: () => {
+            toast.success("Verification email sent, please check your inbox.");
+            router.push(`/verify-email`);
+          },
+          onError: () => {
+            toast.error("Internal Server Error");
+          },
+        },
+      });
+    });
+  }
+
   return (
      <Card className="w-full max-w-md mx-auto border-none shadow-lg rounded-2xl bg-gradient-to-br from-indigo-50 to-purple-100">
       <CardHeader className="text-center pb-4">
@@ -64,12 +87,21 @@ const LoginForm = () => {
         <div className="grid gap-3">
           <div className="grid gap-2">
             <Label htmlFor="email">Email</Label>
-            <Input type="email" placeholder="m@example.com" />
+            <Input type="email" placeholder="m@example.com" value={email} onChange={(e)=>setEmail(e.target.value)} />
             <Button
+            onClick={signInWithEmail}
+              disabled={emailPending}
               variant={"outline"}
               className="w-full bg-indigo-600 text-white hover:bg-indigo-700 transition-all duration-300 flex items-center justify-center gap-3 cursor-pointer hover:text-white"
             >
-              Continue with email
+              {emailPending ? (
+                <>
+                  <Loader className="size-4 animate-spin" />
+                  <span>Loading...</span>
+                </>
+              ) : (
+                <span>Continue with email</span>
+              )}
             </Button>
           </div>
         </div>
