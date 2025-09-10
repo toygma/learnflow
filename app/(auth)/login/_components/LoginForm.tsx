@@ -39,7 +39,7 @@ const LoginForm = () => {
         fetchOptions: {
           onSuccess: () => {
             toast.success("Verification email sent, please check your inbox.");
-            router.push(`/verify-email`);
+            router.push(`/verify-req?email=${email}`);
           },
           onError: () => {
             toast.error("Internal Server Error");

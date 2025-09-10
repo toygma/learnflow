@@ -32,8 +32,8 @@ const AuthLayout = ({ children }: { children: React.ReactNode }) => {
           />
         </Link>
         {children}
-        <div className="text-balance text-center text-xs text-muted-foreground">
-          By clicking continue, you agree to our <span className="hover:text-primary hover:underline">Terms of service</span>
+        <div className="text-balance text-center text-xs text-muted-foreground ">
+          By clicking continue, you agree to our <span className="hover:text-primary hover:underline">Terms of service</span>{" "}
           and <span>Privacy policy</span>.
         </div>
       </div>
