@@ -19,7 +19,7 @@ export {
 
 export default arcjet({
   key: env.ARCJET_KEY,
-  characteristics: ["fingerprint"],
+  characteristics: ["fingerprint", "ip"],
   rules: [
     shield({
       mode: "LIVE",
