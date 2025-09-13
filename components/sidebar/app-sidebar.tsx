@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import * as React from "react"
+import * as React from "react";
 import {
   IconCamera,
   IconChartBar,
@@ -14,11 +14,11 @@ import {
   IconSearch,
   IconSettings,
   IconUsers,
-} from "@tabler/icons-react"
+} from "@tabler/icons-react";
 
-import { NavMain } from "@/components/nav-main"
-import { NavSecondary } from "@/components/nav-secondary"
-import { NavUser } from "@/components/nav-user"
+import { NavMain } from "@/components/sidebar/nav-main";
+import { NavSecondary } from "@/components/sidebar/nav-secondary";
+import { NavUser } from "@/components/sidebar/nav-user";
 import {
   Sidebar,
   SidebarContent,
@@ -27,9 +27,9 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "@/components/ui/sidebar"
-import Link from "next/link"
-import Image from "next/image"
+} from "@/components/ui/sidebar";
+import Link from "next/link";
+import Image from "next/image";
 
 const data = {
   user: {
@@ -129,8 +129,7 @@ const data = {
       icon: IconSearch,
     },
   ],
- 
-}
+};
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
@@ -144,7 +143,13 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             >
               <Link href="/">
                 <IconInnerShadowTop className="!size-5" />
-                <Image src="/logo.png" alt="Logo" width={500} height={500} className="w-44 h-44"/>
+                <Image
+                  src="/logo.png"
+                  alt="Logo"
+                  width={500}
+                  height={500}
+                  className="w-44 h-44"
+                />
               </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
@@ -158,5 +163,5 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <NavUser />
       </SidebarFooter>
     </Sidebar>
-  )
+  );
 }
