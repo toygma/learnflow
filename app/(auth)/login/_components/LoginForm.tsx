@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { useState, useTransition } from "react";
 import { GithubIcon, Loader } from "lucide-react";
 import { useRouter } from "next/navigation";
@@ -12,7 +12,7 @@ const LoginForm = () => {
   const router = useRouter();
   const [githubPending, startGithubTransition] = useTransition();
   const [emailPending, startEmailTransition] = useTransition();
-  const [email,setEmail] = useState("")
+  const [email, setEmail] = useState("");
 
   async function signInWithGitHub() {
     startGithubTransition(async () => {
@@ -31,11 +31,11 @@ const LoginForm = () => {
     });
   }
 
-  function signInWithEmail(){
-    startEmailTransition(async()=>{
+  function signInWithEmail() {
+    startEmailTransition(async () => {
       await authClient.emailOtp.sendVerificationOtp({
         email: email,
-        type: 'sign-in',
+        type: "sign-in",
         fetchOptions: {
           onSuccess: () => {
             toast.success("Verification email sent, please check your inbox.");
@@ -50,20 +50,28 @@ const LoginForm = () => {
   }
 
   return (
-     <Card className="w-full max-w-md mx-auto border-none shadow-lg rounded-2xl bg-gradient-to-br from-indigo-50 to-purple-100">
+    <Card
+      className="w-full max-w-md mx-auto border-none shadow-lg rounded-2xl 
+  bg-gradient-to-br from-indigo-50 to-purple-100 
+  dark:from-gray-900 dark:to-gray-800"
+    >
       <CardHeader className="text-center pb-4">
-        <CardTitle className="text-2xl font-bold text-indigo-800">
+        <CardTitle className="text-2xl font-bold text-indigo-800 dark:text-indigo-300">
           Sign In
         </CardTitle>
-        <p className="text-sm text-gray-600 mt-1">
+        <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
           Connect using your GitHub account
         </p>
       </CardHeader>
-      <CardContent className="flex flex-col  gap-4">
+
+      <CardContent className="flex flex-col gap-4">
         <Button
           disabled={githubPending}
           onClick={signInWithGitHub}
-          className="group relative py-6 text-lg font-medium rounded-xl bg-indigo-600 text-white hover:bg-indigo-700 transition-all duration-300 flex items-center justify-center gap-3 cursor-pointer "
+          className="group relative py-6 text-lg font-medium rounded-xl 
+        bg-indigo-600 text-white hover:bg-indigo-700 
+        dark:bg-indigo-500 dark:hover:bg-indigo-600
+        transition-all duration-300 flex items-center justify-center gap-3 cursor-pointer"
           variant="default"
         >
           {githubPending ? (
@@ -78,21 +86,41 @@ const LoginForm = () => {
             </>
           )}
         </Button>
-        <div className="relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t after:border-black/10 after:dark:border-white/10">
-          <span className="relative z-10 bg-gradient-to-br from-indigo-50 to-purple-100 px-2">
+
+        <div
+          className="relative text-center text-sm 
+      after:absolute after:inset-0 after:top-1/2 after:z-0 
+      after:flex after:items-center after:border-t 
+      after:border-black/10 dark:after:border-white/10"
+        >
+          <span
+            className="relative z-10 
+        bg-gradient-to-br from-indigo-50 to-purple-100 
+        dark:from-gray-900 dark:to-gray-800 px-2"
+          >
             Or continue with
           </span>
         </div>
 
         <div className="grid gap-3">
           <div className="grid gap-2">
-            <Label htmlFor="email">Email</Label>
-            <Input type="email" placeholder="m@example.com" value={email} onChange={(e)=>setEmail(e.target.value)} />
+            <Label htmlFor="email" className="dark:text-gray-300">
+              Email
+            </Label>
+            <Input
+              type="email"
+              placeholder="m@example.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="dark:bg-gray-800 dark:text-white dark:border-gray-700"
+            />
             <Button
-            onClick={signInWithEmail}
+              onClick={signInWithEmail}
               disabled={emailPending}
               variant={"outline"}
-              className="w-full bg-indigo-600 text-white hover:bg-indigo-700 transition-all duration-300 flex items-center justify-center gap-3 cursor-pointer hover:text-white"
+              className="w-full bg-indigo-600 text-white hover:bg-indigo-700 
+            dark:bg-indigo-500 dark:hover:bg-indigo-600 
+            transition-all duration-300 flex items-center justify-center gap-3 cursor-pointer hover:text-white"
             >
               {emailPending ? (
                 <>
@@ -107,7 +135,7 @@ const LoginForm = () => {
         </div>
       </CardContent>
     </Card>
-  )
-}
+  );
+};
 
-export default LoginForm
+export default LoginForm;

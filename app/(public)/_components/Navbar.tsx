@@ -16,7 +16,7 @@ const navigationItems = [
 const Navbar = () => {
   const { data: session, isPending } = authClient.useSession();
   return (
-    <header className="sticky top-0 z-50 w-full bg-white/90 backdrop-blur-sm shadow-sm border-b border-b-slate-200 dark:bg-black">
+    <header className="sticky top-0 z-50 w-full bg-white/90 backdrop-blur-sm shadow-sm border-b border-b-slate-200 dark:bg-[#171717]">
       <div className="flex items-center justify-between h-20 container mx-auto px-4 md:px-6 lg:px-8">
         <Link href={"/"}>
           <Image

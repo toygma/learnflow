@@ -18,28 +18,16 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import Link from "next/link";
-import { authClient } from "@/lib/auth-client";
-import { useRouter } from "next/navigation";
-import { toast } from "sonner";
+import { useSignout } from "@/hooks/use-signout";
 
 interface iAppProps {
-    name: string;
-    email: string;
-    image: string | null | undefined;
+  name: string;
+  email: string;
+  image: string | null | undefined;
 }
 
 export default function UserDropdown({ name, email, image }: iAppProps) {
-    const router = useRouter();
-
-    async function signOut(){
-        await authClient.signOut();
-        fetchOptions: {
-            onSuccess: () => {
-                router.push("/");
-                toast.success("Signed out successfully");
-            }
-        }
-    }
+  const { handleSignOut } = useSignout();
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -68,29 +56,37 @@ export default function UserDropdown({ name, email, image }: iAppProps) {
         <DropdownMenuGroup>
           <DropdownMenuItem asChild className="cursor-pointer">
             <Link href={"/"}>
-              <Home size={16} className="opacity-60" aria-hidden="true" />
-              <span>Home</span>
+              <span className="flex items-center gap-2">
+                <Home size={16} className="opacity-60" aria-hidden="true" />
+                Home
+              </span>
             </Link>
           </DropdownMenuItem>
+
           <DropdownMenuItem asChild className="cursor-pointer">
             <Link href={"/courses"}>
-              <BookOpen size={16} className="opacity-60" aria-hidden="true" />
-              <span>Courses</span>
+              <span className="flex items-center gap-2">
+                <BookOpen size={16} className="opacity-60" aria-hidden="true" />
+                Courses
+              </span>
             </Link>
           </DropdownMenuItem>
+
           <DropdownMenuItem asChild className="cursor-pointer">
-            <Link href={"/dashboard"} >
-              <LayoutDashboard
-                size={16}
-                className="opacity-60"
-                aria-hidden="true"
-              />
-              <span>Dashboard</span>
+            <Link href={"/dashboard"}>
+              <span className="flex items-center gap-2">
+                <LayoutDashboard
+                  size={16}
+                  className="opacity-60"
+                  aria-hidden="true"
+                />
+                Dashboard
+              </span>
             </Link>
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={signOut} className="cursor-pointer">
+        <DropdownMenuItem onClick={handleSignOut} className="cursor-pointer">
           <LogOutIcon size={16} className="opacity-60" aria-hidden="true" />
           <span>Logout</span>
         </DropdownMenuItem>

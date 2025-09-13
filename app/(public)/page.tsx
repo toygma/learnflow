@@ -1,11 +1,6 @@
-"use client";
-import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { authClient } from "@/lib/auth-client";
-import { toast } from "sonner";
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
-import { features } from "process";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 interface featureProps {
@@ -38,18 +33,6 @@ const data: featureProps[] = [
 ];
 
 const Home = () => {
-  const { data: session } = authClient.useSession();
-  const router = useRouter();
-  async function signOut() {
-    await authClient.signOut({
-      fetchOptions: {
-        onSuccess: () => {
-          toast.success("Logout Successfully");
-          router.push("/");
-        },
-      },
-    });
-  }
 
   return (
     <>
@@ -79,7 +62,7 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4">
+      <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4 mb-32">
         {data?.map((item, index) => (
           <Card key={index}>
             <CardHeader>
