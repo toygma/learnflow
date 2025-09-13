@@ -50,21 +50,21 @@ export function NavUser() {
               <Avatar className="h-8 w-8 rounded-lg grayscale">
                 <AvatarImage
                   src={
-                    session?.user.image ??
-                    `https://avatar.vercel.sh/rauchg${session?.user.id}`
+                    session?.user?.image ??
+                    `https://avatar.vercel.sh/rauchg${session?.user?.email}`
                   }
-                  alt={session?.user.name}
+                  alt={session?.user?.name}
                 />
                 <AvatarFallback className="rounded-lg">
-                  {getInitials(session?.user.name, session?.user.email)}
+                  {getInitials(session?.user?.name, session?.user.email)}
                 </AvatarFallback>
               </Avatar>
               <div className="grid flex-1 text-left text-sm leading-tight">
                 <span className="truncate font-medium">
-                  {session?.user.name}
+                  {session?.user?.name}
                 </span>
                 <span className="text-muted-foreground truncate text-xs">
-                  {session?.user.email}
+                  {session?.user?.email}
                 </span>
               </div>
               <IconDotsVertical className="ml-auto size-4" />
@@ -82,12 +82,12 @@ export function NavUser() {
                   <AvatarImage
                     src={
                       session?.user.image ??
-                      `https://avatar.vercel.sh/rauchg${session?.user.id}`
+                      `https://avatar.vercel.sh/rauchg${session?.user?.email}`
                     }
-                    alt={session?.user.name}
+                    alt={session?.user?.name}
                   />
                   <AvatarFallback className="rounded-lg">
-                    {getInitials(session?.user.name, session?.user.email)}
+                    {getInitials(session?.user?.name, session?.user?.email)}
                   </AvatarFallback>
                 </Avatar>
                 <div className="grid flex-1 text-left text-sm leading-tight">
@@ -103,32 +103,32 @@ export function NavUser() {
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
               <DropdownMenuItem asChild className="cursor-pointer">
-                <Link href="/">
-                  <HomeIcon />
-                  Home Page
+                <Link href="/" className="flex items-center gap-2">
+                  <HomeIcon className="size-4" />
+                  <span>Home Page</span>
                 </Link>
               </DropdownMenuItem>
+
               <DropdownMenuItem asChild className="cursor-pointer">
-                <Link href="/admin">
-                  <IconDashboard />
-                  Dashboard
+                <Link href="/admin" className="flex items-center gap-2">
+                  <IconDashboard className="size-4" />
+                  <span>Dashboard</span>
                 </Link>
               </DropdownMenuItem>
+
               <DropdownMenuItem asChild className="cursor-pointer">
-                <Link href="/admin/courses">
-                  <IconDashboard />
-                  Courses
+                <Link href="/admin/courses" className="flex items-center gap-2">
+                  <IconDashboard className="size-4" />
+                  <span>Courses</span>
                 </Link>
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem
-              asChild
-              className="cursor-pointer"
-              onClick={handleSignOut}
-            >
-              <IconLogout />
-              Log out
+            <DropdownMenuItem asChild className="cursor-pointer">
+              <button onClick={handleSignOut} className="flex items-center gap-2 w-full">
+                <IconLogout className="size-4" />
+                <span>Sign Out</span>
+              </button>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
