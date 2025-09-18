@@ -1,3 +1,5 @@
+import slugify from "slugify";
+
 export function getInitials(name?: string, email?: string): string {
   let source = name?.trim();
 
@@ -12,3 +14,10 @@ export function getInitials(name?: string, email?: string): string {
 
   return first + second;
 }
+
+export const generateSlug = (form: any) => {
+  const slugValues = form.getValues("slug");
+  const slug = slugify(slugValues, { lower: true, strict: true });
+  form.setValue("slug", slug, { shouldValidate: true });
+  console.log("Generated slug:", slug);
+};
