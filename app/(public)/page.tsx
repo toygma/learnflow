@@ -43,7 +43,7 @@ const Home = () => {
           </Badge>
         </div>
         <div className="flex flex-col items-center gap-5">
-          <h1 className="text-4xl md:text-6xl font-bold tracking-tight mt-4">
+          <h1 className="text-4xl md:text-6xl font-bold tracking-tight mt-4 text-center">
             Elevate your Learning Experience
           </h1>
           <p className="max-w-[700px] text-muted-foreground md:text-xl text-center">
